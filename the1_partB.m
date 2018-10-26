@@ -1,4 +1,7 @@
 clc;
+
+%%%%%%%%%% B1 %%%%%%%%%%
+
 B1 = imread('./THE1_images/B1.png');
 height = size(B1, 1);
 width = size(B1, 2);
@@ -16,7 +19,7 @@ for y = 1:height
         B1_histogram_r(value_r+1) = B1_histogram_r(value_r+1) + 1;
         B1_histogram_g(value_g+1) = B1_histogram_g(value_g+1) + 1;
         B1_histogram_b(value_b+1) = B1_histogram_b(value_b+1) + 1;
-        % hist(n) holds the value for color value n-1 since hist(0) is not
+        % hist(n+1) holds the value for color value n since hist(0) is not
         % reachable for color value 0.
     end 
 end
@@ -46,6 +49,8 @@ figure, imshow(B1);
 figure, imshow(B1_histeq_output);
 imwrite(B1_histeq_output, 'B1_histeq_output.png');
 
+
+%%%%%%%%%% B2 %%%%%%%%%%
 
 B2 = imread('./THE1_images/B2.png');
 height = size(B2,1);
