@@ -1,6 +1,5 @@
 clc;
-% test berk
-%deneme berk deneme%
+%deneme 3 
 %%%%%%%%%% B1 %%%%%%%%%%
 
 B1 = imread('./THE1_images/B1.png');
