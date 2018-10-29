@@ -1,5 +1,5 @@
 clc;
-
+%deneme 3 
 %%%%%%%%%% B1 %%%%%%%%%%
 
 B1 = imread('./THE1_images/B1.png');
@@ -74,7 +74,7 @@ for y = 1:height
     end
 end
 
-% figure, bar(B2_histogram);
+ figure, bar(B2_histogram);
 
 % find the cumulative histogram
 for i = 2:256
