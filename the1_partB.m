@@ -46,13 +46,7 @@ for y = 1:height
    end
 end
 
-%figure, imshow(B1);
-%autohisteq = histeq(B1);
-%figure, imshow(B1_histeq_output);
-%figure, imshow(autohisteq);
 imwrite(B1_histeq_output, 'B1_histeq_output.png');
-
-
 
 
 
@@ -74,21 +68,27 @@ for y = 1:height
     end
 end
 
- figure, bar(B2_histogram);
+%figure, bar(B2_histogram);
 
 % find the cumulative histogram
 for i = 2:256
     B2_histogram(i) = B2_histogram(i) + B2_histogram(i-1);
 end
 
+c = 255/(height*width);
+B2_mapping = zeros(1,256);
+for i = 1:256
+   B2_mapping(i) = round(c * B2_histogram(i));
+end
+
+%figure, bar(B2_mapping);
 
 % create the new image
 B2_histeq_output = zeros(height, width, 'uint8');
 
 for y = 1:height
    for x = 1:width
-       % (L-1)/N*M = 255/(N*M) = 3.2002e-04
-       B2_histeq_output(y, x) = round(3.2002e-4 * B2_histogram(B2(y,x)+1));
+       B2_histeq_output(y, x) = B2_mapping(B2(y,x)+1);
    end
 end
 
@@ -101,19 +101,60 @@ for y = 1:height
     end
 end
 
-set(gcf,'Visible','off');
-bar(B2_histeq);
-print -dpng B2_histeq.png
-imwrite(B2_histeq_output, 'B2_histeq_output.png');
+%set(gcf,'Visible','off');
+%bar(B2_histeq);
+%print -dpng B2_histeq.png
+%imwrite(B2_histeq_output, 'B2_histeq_output.png');
 
 %figure, bar(B2_histogram);
 %figure, bar(B2_histeq);
 %figure, imshow(B2_histeq_output);
 %figure, imshow(B2);
 
+%%% Specification part
+B2_ref = imread('./THE1_images/B2_ref.png');
+B2_ref_height = size(B2_ref,1);
+B2_ref_width = size(B2_ref,2);
+
+% create and fill the histogram
+B2_ref_histogram = zeros(1,256);
+for y = 1:B2_ref_height
+    for x = 1:B2_ref_width
+        value = B2(y, x);
+        B2_ref_histogram(value+1) = B2_ref_histogram(value+1) + 1;
+        % hist(n) holds the value for color value n-1 since hist(0) is not
+        % reachable for color value 0.
+    end
+end
 
 
 
+% Convert to cumulative
+for i = 2:256
+    B2_ref_histogram(i) = B2_ref_histogram(i) + B2_ref_histogram(i-1);    
+end
 
+B2_ref_mapping = zeros(1,256);
+c = 255/(B2_ref_height * B2_ref_width);
+for i = 1:256
+   B2_ref_mapping(i) = round(c * B2_ref_histogram(i));
+end
+
+mapping = zeros(1,256);
+for i = 1:256
+    [~, ind] = min(abs(B2_ref_mapping - B2_mapping(i)));
+    mapping(i) = ind - 1;
+end
+
+% Create the new image
+B2_histmatch_output = zeros(height, width, 'uint8');
+for y = 1:height
+    for x = 1:width
+        B2_histmatch_output(y,x) = mapping(B2(y,x)+1);       
+    end
+end
+
+%figure, imshow(B2_histmatch_output);
+%figure, imshow(B2);
 
 
