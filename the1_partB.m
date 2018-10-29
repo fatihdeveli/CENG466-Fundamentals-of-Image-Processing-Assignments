@@ -111,6 +111,8 @@ imwrite(B2_histeq_output, 'B2_histeq_output.png');
 %figure, imshow(B2_histeq_output);
 %figure, imshow(B2);
 
+%
+
 
 
 
