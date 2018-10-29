@@ -15,13 +15,13 @@ for y = 1:height
         value_r = B1(y, x, 1);
         value_g = B1(y, x, 2);
         value_b = B1(y, x, 3);
-        
+
         B1_histogram_r(value_r+1) = B1_histogram_r(value_r+1) + 1;
         B1_histogram_g(value_g+1) = B1_histogram_g(value_g+1) + 1;
         B1_histogram_b(value_b+1) = B1_histogram_b(value_b+1) + 1;
         % hist(n+1) holds the value for color value n since hist(0) is not
         % reachable for color value 0.
-    end 
+    end
 end
 
 %figure, bar(B1_histogram_r);
@@ -45,9 +45,16 @@ for y = 1:height
        B1_histeq_output(y,x,3) = round(c * B1_histogram_b(B1(y,x,3)+1));
    end
 end
-figure, imshow(B1);
-figure, imshow(B1_histeq_output);
+
+%figure, imshow(B1);
+%autohisteq = histeq(B1);
+%figure, imshow(B1_histeq_output);
+%figure, imshow(autohisteq);
 imwrite(B1_histeq_output, 'B1_histeq_output.png');
+
+
+
+
 
 
 %%%%%%%%%% B2 %%%%%%%%%%
@@ -61,7 +68,7 @@ B2_histogram = zeros(1,256);
 for y = 1:height
     for x = 1:width
         value = B2(y, x);
-        B2_histogram(value+1) = B2_histogram(value+1) + 1;   
+        B2_histogram(value+1) = B2_histogram(value+1) + 1;
         % hist(n) holds the value for color value n-1 since hist(0) is not
         % reachable for color value 0.
     end
@@ -90,7 +97,7 @@ B2_histeq = zeros(1,256);
 for y = 1:height
     for x = 1:width
         value = B2_histeq_output(y, x);
-        B2_histeq(value+1) = B2_histeq(value+1) + 1;       
+        B2_histeq(value+1) = B2_histeq(value+1) + 1;
     end
 end
 
@@ -103,3 +110,10 @@ imwrite(B2_histeq_output, 'B2_histeq_output.png');
 %figure, bar(B2_histeq);
 %figure, imshow(B2_histeq_output);
 %figure, imshow(B2);
+
+
+
+
+
+
+
