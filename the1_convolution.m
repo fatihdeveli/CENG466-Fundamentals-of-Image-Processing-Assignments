@@ -9,12 +9,12 @@ result = zeros(height, width, 'uint8');
 
 % Cast both parameters to signed int to avoid computation errors with
 % negative intermediate results.
-filter = int32(filter);
-image = int32(image);
+filter = double(filter);
+image = double(image);
 
 if filter_size == 3
-    for y = 1:height
-        for x = 1:width
+    for y = 60:height
+        for x = 360:width
             % Special cases needed for y=1, y=height, x=1, x=width since 
             % filter will try to include out of border pixels.
             
@@ -105,7 +105,7 @@ if filter_size == 3
                             image(y+1, x)   * filter(3,3);
                 
             else % Not on borders
-                new_pixel = int8(image(y-1, x-1) * filter(1,1) + ...
+                new_pixel = image(y-1, x-1) * filter(1,1) + ...
                     image(y-1, x)   * filter(1,2) + ...
                     image(y-1, x+1) * filter(1,3) + ...
                     image(y, x-1)   * filter(2,1) + ...
@@ -113,7 +113,7 @@ if filter_size == 3
                     image(y, x+1)   * filter(2,3) + ...
                     image(y+1, x-1) * filter(3,1) + ...
                     image(y+1, x)   * filter(3,2) + ...
-                    image(y+1, x+1) * filter(3,3));   
+                    image(y+1, x+1) * filter(3,3);   
                 
             end
             result(y, x) = new_pixel;
