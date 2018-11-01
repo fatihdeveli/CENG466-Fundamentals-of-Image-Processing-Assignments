@@ -13,8 +13,8 @@ filter = double(filter);
 image = double(image);
 
 if filter_size == 3
-    for y = 60:height
-        for x = 360:width
+    for y = 1:height
+        for x = 1:width
             % Special cases needed for y=1, y=height, x=1, x=width since 
             % filter will try to include out of border pixels.
             
