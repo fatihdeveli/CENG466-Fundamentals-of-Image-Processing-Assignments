@@ -1,3 +1,7 @@
+%{
+Berk Arslan   2110245
+Fatih Develi  2330892
+%}
 clc;
 
 gaussian = [1/16 1/8 1/16; 1/8 1/4 1/8; 1/16 1/8 1/16];

@@ -1,3 +1,8 @@
+%{
+Berk Arslan   2110245
+Fatih Develi  2330892
+%}
+
 % This script combines the results obtained in the1_partC_edgefilters  
 
 clc;
@@ -61,4 +66,5 @@ imwrite(C2_S_edges, 'C2_S_edges.png');
 imwrite(C2_R_edges, 'C2_R_edges.png');
 imwrite(C3_S_edges, 'C3_S_edges.png');
 imwrite(C3_R_edges, 'C3_R_edges.png');
+
 

@@ -1,3 +1,8 @@
+%{
+Berk Arslan   2110245
+Fatih Develi  2330892
+%}
+
 function result = the1_convolution(image, filter)
 
 % This function convolves an image with the given filter.
@@ -115,8 +120,7 @@ if filter_size == 3
                     image(y, x+1)   * filter(2,3) + ...
                     image(y+1, x-1) * filter(3,1) + ...
                     image(y+1, x)   * filter(3,2) + ...
-                    image(y+1, x+1) * filter(3,3);   
-                
+                    image(y+1, x+1) * filter(3,3);     
             end
             result(y, x) = new_pixel;
         end
@@ -128,8 +132,7 @@ elseif filter_size == 2
             % Special cases needed for y=1, y=height, x=1, x=width since 
             % filter will try to include out of border pixels.
             
-            if y == 1 && x == 1% Upper side 
-                
+            if y == 1 && x == 1% Upper side        
                 % Upper left corner
                     new_pixel = image(y,width)*filter(1,1)+ ...
                             image(y,x)*filter(1,2)+ ...
@@ -159,15 +162,10 @@ elseif filter_size == 2
                             image(y,x)*filter(1,2)+ ...
                             image(y+1,x-1)*filter(2,1)+ ...
                             image(y+1,x)*filter(2,2);
-                %disp(new_pixel);
             end
             result(y,x)= new_pixel;
-            %fprintf('image = %d ',image(y,x));
-            %fprintf('new_pixel = %d \n',new_pixel);
         end
-        
     end
 else
     error('Invalid filter size.');
 end
-

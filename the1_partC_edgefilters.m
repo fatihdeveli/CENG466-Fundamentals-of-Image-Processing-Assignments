@@ -1,5 +1,11 @@
+%{
+Berk Arslan   2110245
+Fatih Develi  2330892
+%}
+
 clc;
 clear;
+
 Sx = [-1 0 1; -2 0 2; -1 0 1];
 Sy = [1 2 1; 0 0 0; -1 -2 -1];
 Rx = [0 1; -1 0];
@@ -20,6 +26,7 @@ C3_Rx = the1_convolution(C3, Rx);
 C1_Ry = the1_convolution(C1, Ry);
 C2_Ry = the1_convolution(C2, Ry);
 C3_Ry = the1_convolution(C3, Ry);
+
 
 imwrite(C1_Sx, 'C1_Sx.png');
 imwrite(C2_Sx, 'C2_Sx.png');

@@ -1,3 +1,8 @@
+%{
+Berk Arslan   2110245
+Fatih Develi  2330892
+%}
+
 clc;
 %%%%%%%%%% A1 %%%%%%%%%%
 A1 = imread('./THE1_images/A1.png');
@@ -32,44 +37,9 @@ imwrite(new_A1, 'A1_output.png');
 
 
 %%%%%%%%%% A2 %%%%%%%%%%
-A2 = imread('./THE1_images/A2.png');
-height = size(A2, 1);
-width = size(A2, 2);
-new_A2 = zeros(900, 800, 3, 'uint8');
-original_w = 640;
-original_h = 480;
-
-% Required translation distances
-shift_h = -1*round((height - original_h)/2);
-shift_w = -1*round((width - original_w)/2);
-
-T_rotation = [cos(pi/4) sin(pi/4) 0; 
-    -sin(pi/4) cos(pi/4) 0; 0 0 1];
-T_translation = [1 0 0; 0 1 0; shift_w shift_h 1];
-T = T_rotation * T_translation;
-T_inv = inv(T);
-
-% [v w 1] = [x y 1] * T_inv
-
-for y = 1:original_h
-   for x = 1:original_w
-       source_pixel = [x y 1] / T; % [x y 1] * T_inv
-       v = round(source_pixel(1));
-       w = round(source_pixel(2));       
-       %new_A2(y, x, 1) = A2(w, v, 1);
-       %new_A2(y, x, 2) = A2(w, v, 2);
-       %new_A2(y, x, 3) = A2(w, v, 3);
-       
-   end
-end
-
-
-%figure, imshow(A2);
-%figure, imshow(new_A2);
 
 
 %%%%%%%%%% A3 %%%%%%%%%%
-
 A3 = imread('./THE1_images/A3.png');
 height = size(A3, 1);
 width = size(A3, 2);
@@ -110,16 +80,12 @@ for y = 1:newheight
     end
 end
 
-%figure, imshow(A3);
-%figure, imshow(new_A3);
 imwrite(new_A3, 'A3_output.png');
 
-
 %%%%%%%%%% A4 %%%%%%%%%%
-A4= imread('./THE1_images/A4.png');
+A4 = imread('./THE1_images/A4.png');
 height = size(A4,1);
 width = size(A4,2);
-
 
 % find the real image width
 realwidth = 0;
@@ -142,14 +108,11 @@ for x = 1:realwidth
         new(y, x, 3) = A4(y, x+shift, 3);
     end
 end
-%figure, imshow(A4)
-%figure, imshow(new)
+
 imwrite(new,'A4_output.png');
 
 
-
 %%%%%%%%%% A5 %%%%%%%%%%
-
 A5 = imread('./THE1_images/A5.png');
 height = size(A5,1);
 width = size(A5,2);

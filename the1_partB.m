@@ -1,5 +1,10 @@
-clc;
+%{
+Berk Arslan   2110245
+Fatih Develi  2330892
+%}
 
+clc;
+clear;
 %%%%%%%%%% B1 %%%%%%%%%%
 
 B1 = imread('./THE1_images/B1.png');
@@ -100,8 +105,6 @@ for i=1:256
 end
 
 
-
-
 %histogram specification process
 M1 = zeros(256,1,'uint8');
 for idx = 1 : 256
@@ -133,12 +136,6 @@ end
 imwrite(B1_hismatch_output,'B1_hismatch_output.png');
 
 
-%figure, imshow(B1);
-%autohisteq = histeq(B1);
-%figure, imshow(B1_histeq_output);
-%figure, imshow(autohisteq);
-
-
 %%%%%%%%%% B2 %%%%%%%%%%
 
 B2 = imread('./THE1_images/B2.png');
@@ -156,8 +153,6 @@ for y = 1:height
     end
 end
 
-%figure, bar(B2_histogram);
-
 % find the cumulative histogram
 for i = 2:256
     B2_histogram(i) = B2_histogram(i) + B2_histogram(i-1);
@@ -168,8 +163,6 @@ B2_mapping = zeros(1,256);
 for i = 1:256
    B2_mapping(i) = round(c * B2_histogram(i));
 end
-
-%figure, bar(B2_mapping);
 
 % create the new image
 B2_histeq_output = zeros(height, width, 'uint8');
@@ -189,15 +182,10 @@ for y = 1:height
     end
 end
 
-%set(gcf,'Visible','off');
-%bar(B2_histeq);
-%print -dpng B2_histeq.png
-%imwrite(B2_histeq_output, 'B2_histeq_output.png');
-
-%figure, bar(B2_histogram);
-%figure, bar(B2_histeq);
-%figure, imshow(B2_histeq_output);
-%figure, imshow(B2);
+set(gcf,'Visible','off');
+bar(B2_histeq);
+print -dpng B2_histeq.png
+imwrite(B2_histeq_output, 'B2_histeq_output.png');
 
 %%% Specification part
 B2_ref = imread('./THE1_images/B2_ref.png');
@@ -214,8 +202,6 @@ for y = 1:B2_ref_height
         % reachable for color value 0.
     end
 end
-
-
 
 % Convert to cumulative
 for i = 2:256
@@ -241,8 +227,3 @@ for y = 1:height
         B2_histmatch_output(y,x) = mapping(B2(y,x)+1);       
     end
 end
-
-%figure, imshow(B2_histmatch_output);
-%figure, imshow(B2);
-
-

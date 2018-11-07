@@ -1,3 +1,11 @@
+%{
+Berk Arslan   2110245
+Fatih Develi  2330892
+%}
+
+% This script repeats the previous process for blurred images.
+% It uses some variables produced in the1_edgefilters.m and
+% the1_partC_edges.m
 
 C1_Sx_blurred = the1_convolution(C1_blurred, Sx);
 C2_Sx_blurred = the1_convolution(C2_blurred, Sx);
@@ -71,3 +79,5 @@ imwrite(C2_S_blurred, 'C2_S_blurred.png');
 imwrite(C2_R_blurred, 'C2_R_blurred.png');
 imwrite(C3_S_blurred, 'C3_S_blurred.png');
 imwrite(C3_R_blurred, 'C3_R_blurred.png');
+
+
