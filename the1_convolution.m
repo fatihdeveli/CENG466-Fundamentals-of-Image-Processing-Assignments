@@ -8,7 +8,7 @@ filter_size = size(filter);
 
 result = zeros(height, width, 'uint8');
 
-% Cast both parameters to signed int to avoid computation errors with
+% Cast both parameters to signed double to avoid computation errors with
 % negative intermediate results.
 filter = double(filter);
 image = double(image);
