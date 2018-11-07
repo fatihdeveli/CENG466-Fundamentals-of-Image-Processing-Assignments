@@ -64,7 +64,8 @@ for y = 1:C3_height
             round(sqrt(C3_Rx_blurred(y,x)^2 + C3_Ry_blurred(y,x)^2));
     end
 end
-
+asd=edge(C2,'Sobel');
+figure , imshow(asd);
 imwrite(C1_S_blurred, 'C1_S_blurred.png');
 imwrite(C1_R_blurred, 'C1_R_blurred.png');
 imwrite(C2_S_blurred, 'C2_S_blurred.png');

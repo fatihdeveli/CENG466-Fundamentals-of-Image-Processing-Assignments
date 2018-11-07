@@ -27,6 +27,7 @@ for y = 1:height
         % reachable for color value 0.
     end
 end
+
 % create and fill 3 colored histograms for B1_ref
 B1_ref_histogram_r=zeros(1,256);
 B1_ref_histogram_g=zeros(1,256);
@@ -43,6 +44,7 @@ for y=1:B1_ref_height
         B1_ref_histogram_b(value_b+1)=B1_ref_histogram_b(value_b+1)+1;
     end
 end
+
 
 %create cumulative histogram of B1_ref
 
@@ -72,6 +74,35 @@ for y = 1:height
    end
 end
 
+% create and fill histograms  3 color channelsfor histeq
+B1_histogram_r = zeros(1,256);
+B1_histogram_g = zeros(1,256);
+B1_histogram_b = zeros(1,256);
+for y = 1:height
+    for x = 1:width
+        value_r = B1_histeq_output(y, x, 1);
+        value_g = B1_histeq_output(y, x, 2);
+        value_b = B1_histeq_output(y, x, 3);
+
+        B1_histogram_r(value_r+1) = B1_histogram_r(value_r+1) + 1;
+        B1_histogram_g(value_g+1) = B1_histogram_g(value_g+1) + 1;
+        B1_histogram_b(value_b+1) = B1_histogram_b(value_b+1) + 1;
+        % hist(n+1) holds the value for color value n since hist(0) is not
+        % reachable for color value 0.
+    end
+end
+
+
+
+if true
+ fig=figure('visible','off');
+subplot(3,1,1),bar(B1_histogram_r,'r');
+subplot(3,1,2),bar(B1_histogram_g,'g');
+subplot(3,1,3),bar(B1_histogram_b,'b');
+end
+
+
+print(fig,'B1_histeq','-dpng');
 %create the new B1_ref_histeq_output image
 B1_ref_histeq_output = zeros(B1_ref_height, B1_ref_width, 3, 'uint8');
 d = 255/(B1_ref_height*B1_ref_width); % d is a constant for (L-1)/N*M = 255/(N*M)
