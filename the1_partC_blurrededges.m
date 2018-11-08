@@ -21,14 +21,14 @@ C2_Ry_blurred = the1_convolution(C2_blurred, Ry);
 C3_Ry_blurred = the1_convolution(C3_blurred, Ry);
 
 
-C1_S_blurred = zeros(C1_height, C1_width);
-C1_R_blurred = zeros(C1_height, C1_width);
+C1_S_blurred = zeros(C1_height, C1_width, 'uint8');
+C1_R_blurred = zeros(C1_height, C1_width, 'uint8');
 
-C2_S_blurred = zeros(C2_height, C2_width);
-C2_R_blurred = zeros(C2_height, C2_width);
+C2_S_blurred = zeros(C2_height, C2_width, 'uint8');
+C2_R_blurred = zeros(C2_height, C2_width, 'uint8');
 
-C3_S_blurred = zeros(C3_height, C3_width);
-C3_R_blurred = zeros(C3_height, C3_width);
+C3_S_blurred = zeros(C3_height, C3_width, 'uint8');
+C3_R_blurred = zeros(C3_height, C3_width, 'uint8');
 
 % CX_?? images must be casted to double to be able to do the calculations.
 C1_Sx_blurred = double(C1_Sx_blurred);
@@ -72,8 +72,7 @@ for y = 1:C3_height
             round(sqrt(C3_Rx_blurred(y,x)^2 + C3_Ry_blurred(y,x)^2));
     end
 end
-asd=edge(C2,'Sobel');
-figure , imshow(asd);
+
 imwrite(C1_S_blurred, 'C1_S_blurred.png');
 imwrite(C1_R_blurred, 'C1_R_blurred.png');
 imwrite(C2_S_blurred, 'C2_S_blurred.png');
