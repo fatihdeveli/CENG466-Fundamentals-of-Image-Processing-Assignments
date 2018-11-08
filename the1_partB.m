@@ -76,6 +76,7 @@ for y = 1:height
        B1_histeq_output(y,x,3) = round(c * B1_histogram_b(B1(y,x,3)+1));
    end
 end
+imwrite(B1_histeq_output, 'B1_histeq_output.png');
 
 %create the new B1_ref_histeq_output image
 B1_ref_histeq_output = zeros(B1_ref_height, B1_ref_width, 3, 'uint8');
@@ -133,7 +134,7 @@ for y=1:height
         B1_hismatch_output(y,x,3)=M3(B1(y,x,3)+1);
     end
 end
-imwrite(B1_hismatch_output,'B1_hismatch_output.png');
+imwrite(B1_hismatch_output,'B1_histmatch_output.png');
 
 
 %%%%%%%%%% B2 %%%%%%%%%%
@@ -227,3 +228,5 @@ for y = 1:height
         B2_histmatch_output(y,x) = mapping(B2(y,x)+1);       
     end
 end
+
+imwrite(B2_histmatch_output, 'B2_histmatch_output.png');
