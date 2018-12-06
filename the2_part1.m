@@ -2,11 +2,17 @@
 Berk Arslan 2110245
 Fatih Develi 2330892
 %}
-
 clear;
 clc;
-A1=imread('the2_input/A1.png');
-A2=imread('the2_input/A2.png');
+
+if (exist('the2_input', 'dir') == 7)
+    A1=imread('the2_input/A1.png');
+    A2=imread('the2_input/A2.png');
+else
+    A1=imread('A1.png');
+    A2=imread('A2.png');
+end
+
 
 [cA1,cH1,cV1,cD1] = dwt2(im2double(A1),'haar');
 [cAA1,cAH1,cAV1,cAD1] = dwt2(cA1,'haar'); % Recompute Wavelet of Approximation Coefs.
@@ -35,9 +41,11 @@ cV2=[zeros(size(cV2,1),1) cV2];
 X3 = idwt2(cAAA1,cAAH1,cAAV1,cAAD1,'haar');
 X2 = idwt2(X3,cAH1,cAV1,cAH2,'haar');
 X1 = idwt2(X2,cD1,cV2,cD2,'haar');
-figure,imshow(X1);
+%figure,imshow(X1);
+imwrite(X1, 'A1_output.png');
 
 X32 = idwt2(cAAA2,cAAH2,cAAV2,cAAD2,'haar');
 X22 = idwt2(X32,cAV2,cAD1,cAD2,'haar');
 X12 = idwt2(X22,cH2,cH1,cV1,'haar');
-figure,imshow(X12);
+%figure,imshow(X12);
+imwrite(X12, 'A2_output.png');

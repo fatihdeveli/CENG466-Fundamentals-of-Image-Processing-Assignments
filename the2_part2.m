@@ -2,23 +2,27 @@
 Berk Arslan 2110245
 Fatih Develi 2330892
 %}
-
 clear;
 clc;
-warning off;
 
-B1 = imread('the2_input/B1.png');
+if (exist('the2_input', 'dir') == 7)
+    B1 = imread('the2_input/B1.png');
+    B2 = imread('the2_input/B2.png');
+    B3 = imread('the2_input/B3.png');
+else
+    B1 = imread('B1.png');
+    B2 = imread('B2.png');
+    B3 = imread('B3.png');
+end
+
 B1_height = size(B1, 1);
 B1_width = size(B1, 2);
 
-B2 = imread('the2_input/B2.png');
 B2_height = size(B2, 1);
 B2_width = size(B2, 2);
 
-B3 = imread('the2_input/B3.png');
 B3_height = size(B3, 1);
 B3_width = size(B3, 2);
-
 
 %%%%% B1 %%%%%
 B1_t = fft2(B1);

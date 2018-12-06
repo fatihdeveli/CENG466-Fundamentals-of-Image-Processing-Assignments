@@ -5,11 +5,17 @@ Fatih Develi 2330892
 clear;
 clc;
 
-C1 = imread('the2_input/C1.png');
+if (exist('the2_input', 'dir') == 7)
+    C1 = imread('the2_input/C1.png');
+    C2 = imread('the2_input/C2.png');
+else
+    C1 = imread('C1.png');
+    C2 = imread('C2.png');
+end
+
 C1_height = size(C1, 1);
 C1_width = size(C1, 2);
 
-C2 = imread('the2_input/C2.png');
 C2_height = size(C2, 1);
 C2_width = size(C2, 2);
 
