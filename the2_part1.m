@@ -1,3 +1,8 @@
+%{
+Berk Arslan 2110245
+Fatih Develi 2330892
+%}
+
 clear;
 clc;
 A1=imread('the2_input/A1.png');
@@ -36,28 +41,3 @@ X32 = idwt2(cAAA2,cAAH2,cAAV2,cAAD2,'haar');
 X22 = idwt2(X32,cAV2,cAD1,cAD2,'haar');
 X12 = idwt2(X22,cH2,cH1,cV1,'haar');
 figure,imshow(X12);
-
-
-
-%cA1 = cA1 + cH1;  manipulations begin
-%cA1 = cA1 + cH2;
-%cA1 = cA1 + cD1;  manipulations end.
-
-
-%cA3 = cD1; swaping begins
-%cD1 = cH1;
-%cH1 = cA3;
-
-%cA3 = cV1;
-%cV1 = cV2;
-%cV2 = cA3;
-
-%cA3 = cD1;
-%cD1 = cD2;
-%cD2 = cA3; swaping ends
-
-%X = idwt2(cA1,cH1,cV1,cD1,'haar');
-%figure ,imshow(X);
-%figure ,imshow(A1);
-%figure,imshow([cA2,cH2; cV2,cD2],'Colormap',pink);
-%figure,imshow([cA1,cH1; cV1,cD1],'Colormap',pink);
