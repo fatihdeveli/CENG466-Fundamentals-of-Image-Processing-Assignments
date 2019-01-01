@@ -26,13 +26,13 @@ A1_gray = rgb2gray(A1);
 % Threshold
 A1_binary = zeros(A1_height, A1_width, 'logical'); % Create a binary image
 for y=1:A1_height
-   for x=1:A1_width
-       if (A1_gray(y,x) > 50)
-           A1_binary(y, x) = 0;
-       else
-           A1_binary(y, x) = 1;
-       end
-   end
+    for x=1:A1_width
+        if (A1_gray(y,x) > 50)
+            A1_binary(y, x) = 0;
+        else
+            A1_binary(y, x) = 1;
+        end
+    end
 end
 
 SE = disk_matrix(3);
@@ -45,6 +45,7 @@ result = remove_component(result, 1);
 
 %figure, imshow(A1_gray);
 %figure, imshow(result);
+imwrite(result, 'part1_A1.png');
 fprintf('There are %d balloons in image A1.\n', n);
 
 
@@ -71,36 +72,60 @@ result = remove_component(result, 2); % Remove the non-balloon element
 [result, n] = bwlabel(result);
 %figure, imshow(A2_gray);
 %figure, imshow(result);
+imwrite(result, 'part1_A2.png');
 fprintf('There are %d balloons in image A2.\n', n);
 
 
 %%%%%%%%%%%%%%%%%%%% A3 %%%%%%%%%%%%%%%%%%%%
 A3_gray = rgb2gray(A3);
 
-
 SE = disk_matrix(4); % Structuring element
-temp = imerode(A3_gray, SE);
-A3_gray = A3_gray - temp;
+A3_open = imopen(A3_gray, SE);
+A3_close = imclose(A3_gray, SE);
+A3_erode = imerode(A3_gray, SE);
+A3_dilate = imdilate(A3_gray, SE);
+
+A3_edges = A3_dilate - A3_erode;
+
 
 % Threshold
 A3_binary = zeros(A3_height, A3_width, 'logical'); % Create a binary image
 for y=1:A3_height
-   for x=1:A3_width
-       if (A3_gray(y,x) < 70)
-           A3_binary(y, x) = 0;
-       else
-           A3_binary(y, x) = 1;
-       end
-   end
+    for x=1:A3_width
+        if (A3_close(y,x) > 150)
+            A3_binary(y, x) = 0;
+        else
+            A3_binary(y, x) = 1;
+        end
+    end
 end
 
-%A3_binary = imerode(A3_binary, disk_matrix(1));
+% Edge threshold
+A3_binary_edge = zeros(A3_height, A3_width, 'logical'); % Create a binary image
+for y=1:A3_height
+    for x=1:A3_width
+        if (A3_edges(y,x) < 30)
+            A3_binary_edge(y, x) = 0;
+        else
+            A3_binary_edge(y, x) = 1;
+        end
+    end
+end
+
+%figure, imshow(A3_binary_edge);
 
 %figure, imshow(A3_binary);
+A3_binary = imerode(A3_binary, disk_matrix(5));
+%A3_binary = bwareaopen(A3_binary, 15);
+
 [result, n] = bwlabel(A3_binary);
 %figure, imshow(result);
-%figure, imshow(A3);
+%figure, imshow(result-A3_binary_edge);
+%figure, imshow(A3_gray);
 fprintf('There are %d balloons in image A3.\n', n-1);
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%% A4 %%%%%%%%%%%%%%%%%%%%
@@ -109,13 +134,13 @@ A4_gray = rgb2gray(A4);
 % Threshold
 A4_binary = zeros(A4_height, A4_width, 'logical'); % Create a binary image
 for y=1:A4_height
-   for x=1:A4_width
-       if (A4_gray(y,x) > 50)
-           A4_binary(y, x) = 0;
-       else
-           A4_binary(y, x) = 1;
-       end
-   end
+    for x=1:A4_width
+        if (A4_gray(y,x) > 50)
+            A4_binary(y, x) = 0;
+        else
+            A4_binary(y, x) = 1;
+        end
+    end
 end
 
 
@@ -123,34 +148,39 @@ SE = disk_matrix(5); % Structuring element
 A4_binary = imopen(A4_binary, SE);
 
 [result, ~] = bwlabel(A4_binary);
-resul = remove_component(result, 1);
+result = remove_component(result, 1);
 [result, n] = bwlabel(result);
-figure,imshow(A4_gray);
-figure, imshow(result);
+%figure,imshow(A4_gray);
+%figure, imshow(result);
+imwrite(result, 'part1_A4.png');
 
 fprintf('There are %d balloons in image A4.\n', n);
 
 
 %%%%%%%%%%%%%%%%%%%% A5 %%%%%%%%%%%%%%%%%%%%
 A5_gray = rgb2gray(A5);
-SE = disk_matrix(3);
+
 % Threshold
 A5_binary = zeros(A5_height, A5_width, 'logical'); % Create a binary image
 for y=1:A5_height
-   for x=1:A5_width
-       if (A5_gray(y,x) > 90)
-           A5_binary(y, x) = 0;
-       else
-           A5_binary(y, x) = 1;
-       end
-   end
+    for x=1:A5_width
+        if (A5_gray(y,x) > 75)
+            A5_binary(y, x) = 0;
+        else
+            A5_binary(y, x) = 1;
+        end
+    end
 end
 
+SE = disk_matrix(3);
 A5_binary = imopen(A5_binary, SE);
 
-[result, n] = bwlabel(A5_binary);
+[result, ~] = bwlabel(A5_binary);
+result = remove_component(result, 1);
+[result, n] = bwlabel(result);
 %figure, imshow(A5_gray);
 %figure, imshow(result);
+imwrite(result, 'part1_A5.png');
 fprintf('There are %d balloons in image A5.\n', n-1);
 
 
