@@ -1,3 +1,8 @@
+%{
+Berk Arslan 2110245
+Fatih Develi 2330892
+%}
+
 clear;
 clc;
 
@@ -79,52 +84,31 @@ fprintf('There are %d balloons in image A2.\n', n);
 %%%%%%%%%%%%%%%%%%%% A3 %%%%%%%%%%%%%%%%%%%%
 A3_gray = rgb2gray(A3);
 
-SE = disk_matrix(4); % Structuring element
-A3_open = imopen(A3_gray, SE);
-A3_close = imclose(A3_gray, SE);
-A3_erode = imerode(A3_gray, SE);
-A3_dilate = imdilate(A3_gray, SE);
-
-A3_edges = A3_dilate - A3_erode;
-
 
 % Threshold
 A3_binary = zeros(A3_height, A3_width, 'logical'); % Create a binary image
 for y=1:A3_height
     for x=1:A3_width
-        if (A3_close(y,x) > 150)
+        if (A3_gray(y,x) > 130)
             A3_binary(y, x) = 0;
         else
             A3_binary(y, x) = 1;
         end
     end
 end
+figure,imshow(A3_binary);
 
-% Edge threshold
-A3_binary_edge = zeros(A3_height, A3_width, 'logical'); % Create a binary image
-for y=1:A3_height
-    for x=1:A3_width
-        if (A3_edges(y,x) < 30)
-            A3_binary_edge(y, x) = 0;
-        else
-            A3_binary_edge(y, x) = 1;
-        end
-    end
-end
+SE = disk_matrix(5); % Structuring element
+A3_binary = imopen(A3_binary, SE);
 
-%figure, imshow(A3_binary_edge);
-
-%figure, imshow(A3_binary);
-A3_binary = imerode(A3_binary, disk_matrix(5));
-%A3_binary = bwareaopen(A3_binary, 15);
-
-[result, n] = bwlabel(A3_binary);
+[result, ~] = bwlabel(A3_binary);
+result = remove_component(result, 1);
+[result, n] = bwlabel(result);
 %figure, imshow(result);
-%figure, imshow(result-A3_binary_edge);
 %figure, imshow(A3_gray);
-fprintf('There are %d balloons in image A3.\n', n-1);
 
-
+imwrite(result, 'part1_A3.png');
+fprintf('There are %d balloons in image A3.\n', n);
 
 
 
@@ -181,10 +165,5 @@ result = remove_component(result, 1);
 %figure, imshow(A5_gray);
 %figure, imshow(result);
 imwrite(result, 'part1_A5.png');
-fprintf('There are %d balloons in image A5.\n', n-1);
-
-
-
-
-
+fprintf('There are %d balloons in image A5.\n', n);
 

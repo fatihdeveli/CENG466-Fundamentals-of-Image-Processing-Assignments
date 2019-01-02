@@ -1,3 +1,8 @@
+%{
+Berk Arslan 2110245
+Fatih Develi 2330892
+%}
+
 function [ output ] = remove_component( image, index )
 %REMOVE_COMPONENT Deletes the component with given index from given image.
 %   Detailed explanation goes here

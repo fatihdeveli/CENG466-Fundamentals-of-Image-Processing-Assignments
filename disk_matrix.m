@@ -1,3 +1,8 @@
+%{
+Berk Arslan 2110245
+Fatih Develi 2330892
+%}
+
 function [ se ] = disk_matrix( r )
 %DISK_MATRIX Creates a binary matrix with a disk of 1's inside.
 %   Detailed explanation goes here
