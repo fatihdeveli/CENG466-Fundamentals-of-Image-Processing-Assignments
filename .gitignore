@@ -37,3 +37,6 @@ octave-workspace
 ## Project specific
 THE3_inputs.tar.gz
 *.png
+Report/
+THE3.tar.gz
+
